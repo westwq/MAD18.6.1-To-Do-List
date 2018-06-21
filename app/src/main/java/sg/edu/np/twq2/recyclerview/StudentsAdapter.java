@@ -1,14 +1,17 @@
 package sg.edu.np.twq2.recyclerview;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -53,9 +56,35 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentViewHolder>{
                                         public void onClick(View v)
                                         {
                                             Log.d("xxxxxxxxxxxx","long click " + position);
-                                            FragmentManager fm = ((Activity)context).getFragmentManager();
+
+                                            /*FragmentManager fm = ((Activity)context).getFragmentManager();
                                             DeleteDialog dialogFragment = new DeleteDialog ();
-                                            dialogFragment.show(fm, "Sample Fragment");
+                                            dialogFragment.show(fm, "Sample Fragment");*/
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                            builder.setTitle("Delete");
+                                            View content = ((Activity)context).getLayoutInflater().inflate(R.layout.dialog, null);
+                                            TextView tv = content.findViewById(R.id.content);
+                                            tv.setText(studentList.get(position) + "?");
+
+                                            //builder.setMessage("Are you sure you want to delete?");
+                                            builder.setView(content);
+                                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    studentList.remove(position);
+                                                    notifyDataSetChanged();
+                                                    dialogInterface.dismiss();
+                                                }
+                                            });
+                                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    dialogInterface.cancel();
+                                                }
+                                            });
+                                            builder.show();
+
+                                            //builder.show();
                                             //return true;
                                         }
                                     }
