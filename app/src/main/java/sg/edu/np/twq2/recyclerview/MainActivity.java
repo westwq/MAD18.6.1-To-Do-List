@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.scrollToPosition(movieList.size() - 1);
 
-        //InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        //imm.hideSoftInputFromWindow(recyclerView.getWindowToken(), 0);
+        //auto hide keyboard after entry
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(recyclerView.getWindowToken(), 0);
     }
 }
