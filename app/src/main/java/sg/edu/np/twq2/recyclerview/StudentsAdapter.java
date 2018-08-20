@@ -57,9 +57,6 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentViewHolder>{
                                         {
                                             Log.d("xxxxxxxxxxxx","long click " + position);
 
-                                            /*FragmentManager fm = ((Activity)context).getFragmentManager();
-                                            DeleteDialog dialogFragment = new DeleteDialog ();
-                                            dialogFragment.show(fm, "Sample Fragment");*/
                                             AlertDialog.Builder builder = new AlertDialog.Builder(context);
                                             builder.setTitle("Delete");
                                             View content = ((Activity)context).getLayoutInflater().inflate(R.layout.dialog, null);
@@ -84,11 +81,8 @@ public class StudentsAdapter extends RecyclerView.Adapter<StudentViewHolder>{
                                             });
                                             builder.show();
 
-                                            //builder.show();
-                                            //return true;
                                         }
                                     }
-
         );
     }
 
